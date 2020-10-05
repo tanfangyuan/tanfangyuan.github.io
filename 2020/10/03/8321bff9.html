@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://tanfangyuan.github.io/2020/10/03/8321bff9/docRep.jpg">
 <meta property="og:image" content="https://tanfangyuan.github.io/2020/10/03/8321bff9/visualization.png">
 <meta property="article:published_time" content="2020-10-03T05:37:10.000Z">
-<meta property="article:modified_time" content="2020-10-05T05:38:48.887Z">
+<meta property="article:modified_time" content="2020-10-05T05:59:58.888Z">
 <meta property="article:author" content="tanfangyuan">
 <meta property="article:tag" content="paper">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-05 13:38:48" itemprop="dateModified" datetime="2020-10-05T13:38:48+08:00">2020-10-05</time>
+                <time title="修改时间：2020-10-05 13:59:58" itemprop="dateModified" datetime="2020-10-05T13:59:58+08:00">2020-10-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -292,14 +292,16 @@
 <h4 id="wmd计算优化">1.2.3 WMD计算优化</h4>
 <p>  WMD的最好平均时间复杂度为<span class="math inline">\(O(p^3\log p)\)</span>（p表示一篇文档中出现的不重复单词个数），对于文章中含有大量不重复单词或者文章数量众多的情况，wmd算法的代价太高。以下我们介绍几种利用求取WMD的lower bounds进行优化的算法：WCD &amp; RWMD。</p>
 <ul>
-<li><strong>Word Centroid Distance</strong><br>
-&gt;【向量范数定义】<br>
-&gt;如果向量 x∈Rn 的某个实值函数f(x)=||x||满足：<br>
-&gt;1. 正定性： ||x||≥0，且||x||=0当且仅当x=0；<br>
-&gt;2. 齐次性：对任意实数 α ，都有||αx||=|α| ||x||;<br>
-&gt;3. 三角不等式：对任意x,y∈Rn，都有||x+y||≤||x||+||y||;<br>
-&gt;则称||x|| 为 Rn上的一个向量范数</li>
+<li><strong>Word Centroid Distance</strong></li>
 </ul>
+<blockquote>
+<p>【向量范数定义】<br>
+如果向量 x∈Rn 的某个实值函数f(x)=||x||满足：<br>
+1. 正定性： ||x||≥0，且||x||=0当且仅当x=0；<br>
+2. 齐次性：对任意实数 α ，都有||αx||=|α| ||x||;<br>
+3. 三角不等式：对任意x,y∈Rn，都有||x+y||≤||x||+||y||;<br>
+则称||x|| 为 Rn上的一个向量范数</p>
+</blockquote>
 <p>  根据上述向量范数的定义，可以推得“centroid”距离<span class="math inline">\(\rVert Xd-Xd&#39;\rVert\)</span>必定是WMD算法中两文本距离的lower bound：<br>
 <span class="math display">\[\begin{split}\sum_{i,j=1}^n{T_{ij}c(i,j)} &amp;= \sum_{i,j=1}^n{T_{ij} \rVert x_i - x&#39;_j \rVert _2} \\&amp;= \sum_{i,j=1}^n{\rVert T_{ij}(x_i-x&#39;_j) \rVert_2} \quad(范数的齐次性) \\&amp;\geq \rVert \sum_{i,j=1}^n{T_{ij}(x_i-x&#39;_j) \rVert_2} \quad(范数的三角不等式性质) \\&amp;=\rVert \sum_{i=1}^n\left(\sum_{j=1}^n{T_{ij}}\right)x_i - \sum_{j=1}^n\left(\sum_{i=1}^n{T_{ij}}\right)x&#39;_j \rVert_2 \\&amp;=\rVert \sum_{i=1}^n{d_ix_i}-\sum_{j=1}^n{d&#39;_jx&#39;_j}\rVert_2 \\&amp;=\rVert Xd - Xd&#39; \rVert_2\end{split}\tag{5}\]</span> 上述WCD算法的时间复杂度为<span class="math inline">\(O(dp)\)</span>，可以在求解topK相似的文档时使用该算法加快确定较小的候选集。</p>
 <ul>
