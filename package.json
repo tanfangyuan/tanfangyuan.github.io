@@ -38,9 +38,10 @@
     "login": "fionatan",
     "repo": "hexo",
     "mdNameFormat": "title",
+    "postPath": "source/_posts",
     "cachePath": "yuque.json",
     "adapter": "hexo",
-    "token":"KSpYCRAag5Z7KAU2bmP5hsQoqoQrBOHjCgLrGIFe",
+    "token": "KSpYCRAag5Z7KAU2bmP5hsQoqoQrBOHjCgLrGIFe",
     "onlyPublished": true,
     "onlyPublic": true
   }
